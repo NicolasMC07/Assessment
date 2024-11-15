@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using APiClinique.Models;
+using APiClinique.Sedeers;
 using Microsoft.EntityFrameworkCore;
 
 namespace APiClinique.Data
@@ -24,7 +25,10 @@ namespace APiClinique.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            UserSeeder.Seed(modelBuilder);
+            DoctorSeeder.Seed(modelBuilder);
+            PatientSeeder.Seed(modelBuilder);
+            AppointmentSeeder.Seed(modelBuilder);
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Doctor)

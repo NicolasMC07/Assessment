@@ -16,13 +16,13 @@ namespace APiClinique.Models
         public int Id { get; set; }
 
         [Required]
-        public int DoctorId { get; set; } 
+        public int DoctorId { get; set; }
 
         [ForeignKey("DoctorId")]
         public Doctor? Doctor { get; set; }
 
         [Required]
-        public int PatientId { get; set; } 
+        public int PatientId { get; set; }
 
         [ForeignKey("PatientId")]
         public Patient? Patient { get; set; }
@@ -35,7 +35,7 @@ namespace APiClinique.Models
 
 
         // constructor
-        public Appointment(int patientId, int doctorId, DateTime appointmentTime, string reason, bool isCanceled)
+        public Appointment(int patientId, int doctorId, DateTime appointmentTime, bool isCanceled)
         {
             PatientId = patientId;
             DoctorId = doctorId;
@@ -45,6 +45,13 @@ namespace APiClinique.Models
         public Appointment()
         {
 
+        }
+        public Appointment(int doctorId, int patientId, DateTime appointmentDate)
+        {
+            DoctorId = doctorId;
+            PatientId = patientId;
+            AppointmentDate = appointmentDate;
+            IsCanceled = false; 
         }
     }
 }

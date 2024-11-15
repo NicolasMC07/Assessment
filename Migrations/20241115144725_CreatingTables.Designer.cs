@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APiClinique.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241115142317_CreatingTables")]
+    [Migration("20241115144725_CreatingTables")]
     partial class CreatingTables
     {
         /// <inheritdoc />
