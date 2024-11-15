@@ -1,5 +1,7 @@
-// Load environment variables from .env file
 using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
+using APiClinique.Data;
+
 
 Env.Load();
 
@@ -15,7 +17,11 @@ var connectionDB = $"server={dbHost};port={dbPort};database={dbDatabaseName};uid
 
 
 var builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(connectionDB, ServerVersion.AutoDetect(connectionDB))
+);
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

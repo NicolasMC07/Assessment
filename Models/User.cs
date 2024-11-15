@@ -33,8 +33,6 @@ public class User
 
     public DateTime CreatedAt { get; set; }
 
-    // Aquí eliminamos la propiedad redundante "Patient"
-    // Propiedades de navegación para Doctor y Patient
     public Doctor? Doctor { get; set; }
     public Patient? Patient { get; set; }
 
