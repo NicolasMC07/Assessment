@@ -7,51 +7,48 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace APiClinique.Models
-{   
+{
     // class Model
-    [Table("users")]
-    public class User
+    [Table("Users")]
+public class User
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+
+    [Required]
+    [MaxLength(100)]
+    public string? Name { get; set; }
+
+    [Required]
+    [EmailAddress]
+    [MaxLength(100)]
+    public string? Email { get; set; }
+
+    [Required]
+    public string? Password { get; set; }
+
+    [Required]
+    public string? Role { get; set; }
+
+    public DateTime CreatedAt { get; set; }
+
+    // Aquí eliminamos la propiedad redundante "Patient"
+    // Propiedades de navegación para Doctor y Patient
+    public Doctor? Doctor { get; set; }
+    public Patient? Patient { get; set; }
+
+    // Constructor
+    public User(string name, string email, string password, string role, DateTime createdAt)
     {
-        // properties
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public int Id { get; set; }
-
-        [Column("name")]
-        [Required]
-        [StringLength(100)]
-        public string? Name { get; set; }
-
-        [Column("email")]
-        [Required]
-        [StringLength(200)]
-        public string? Email { get; set; }
-
-        [Column("password")]
-        [Required]
-        public string? Password { get; set; }
-
-        [Column("role")]
-        [Required]
-        [StringLength(20)] 
-        public string? Role { get; set; } 
-
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
-
-        // contructor
-        public User(string name, string email, string password, string role, DateTime createdAt)
-        {
-            Name = name;
-            Email = email;
-            Password = password;
-            Role = role;
-            CreatedAt = createdAt;
-        }
-
-        public User()
-        {
-        }
+        Name = name;
+        Email = email;
+        Password = password;
+        Role = role;
+        CreatedAt = createdAt;
     }
+
+    public User() { }
+}
+
 }

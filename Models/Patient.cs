@@ -6,49 +6,31 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace APiClinique.Models
-{   
+{
     // class Model
-    [Table("patients")]
+    [Table("Patients")]
     public class Patient
-    {   
-        // properties
+    {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
         public int Id { get; set; }
 
-        [Column("name")]
         [Required]
-        [StringLength(100)]
-        public string? Name { get; set; }
+        public int UserId { get; set; }
 
-        [Column("email")]
-        [Required]
-        [StringLength(200)]
-        public string? Email { get; set; }
+        [ForeignKey("UserId")]
+        public User? User { get; set; }
 
-        [Column("phone_number")]
-        [Required]
-        [StringLength(15)]
-        public string? PhoneNumber { get; set; }
+        public ICollection<Appointment>? Appointments { get; set; }
 
-        [Column("appointments")]
-        [Required]  
-        public List<Appointment>? Appointments { get; set; }
-
-        // constructor
-        public Patient(string name, string email, string phoneNumber, List<Appointment>? appointments)
-        {                                                                                                                                                                       
-            Name = name;
-            Email = email;
-            PhoneNumber = phoneNumber;
+        // Constructor
+        public Patient(int userId, List<Appointment>? appointments)
+        {
+            UserId = userId;
             Appointments = appointments;
         }
 
-        
-        Patient()
-        {
-            
-        }
+        public Patient() { }
     }
+
 }

@@ -6,53 +6,46 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace APiClinique.Models
-{   
+{
     // class Model
-    [Table("appointments")]
+    [Table("Appointments")]
     public class Appointment
-    {   
-        // properties
+    {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
         public int Id { get; set; }
 
-        [Column("patient_id")]
-        public int PatientId { get; set; }
-
-        [ForeignKey("PatientId")]
-        public Patient? Patient { get; set; } 
-
-        [Column("doctor_id")]
-        public int DoctorId { get; set; }
+        [Required]
+        public int DoctorId { get; set; } 
 
         [ForeignKey("DoctorId")]
-        [Required]
-        public Doctor? Doctor { get; set; } 
+        public Doctor? Doctor { get; set; }
 
-        [Column("appointment_time")]
         [Required]
-        public DateTime AppointmentTime { get; set; } 
+        public int PatientId { get; set; } 
 
-        [Column("reason")]
+        [ForeignKey("PatientId")]
+        public Patient? Patient { get; set; }
+
+        [Column("appointment_date")]
         [Required]
-        public string? Reason { get; set; } 
+        public DateTime AppointmentDate { get; set; }
 
-        [Column("is_canceled")]
         public bool IsCanceled { get; set; }
+
 
         // constructor
         public Appointment(int patientId, int doctorId, DateTime appointmentTime, string reason, bool isCanceled)
         {
             PatientId = patientId;
             DoctorId = doctorId;
-            AppointmentTime = appointmentTime;
-            Reason = reason;
+            AppointmentDate = appointmentTime;
             IsCanceled = isCanceled;
         }
         public Appointment()
         {
-            
+
         }
     }
 }
+

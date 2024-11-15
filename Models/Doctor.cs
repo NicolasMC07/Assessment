@@ -6,36 +6,31 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace APiClinique.Models
-{   
+{
     // class Model
-    [Table("doctors")]
+    [Table("Doctors")]
     public class Doctor
-    {   
-        // properties
+    {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
         public int Id { get; set; }
 
-        [Column("name")]
         [Required]
-        [StringLength(100)]
-        public string? Name { get; set; }
+        public int UserId { get; set; }
 
-        [Column("appointments")]
-        [Required]  
-        public List<Appointment>? Appointments { get; set; }
+        [ForeignKey("UserId")]
+        public User? User { get; set; }
 
-        //constructor
-        public Doctor(string name, List<Appointment>? appointments)
+        public ICollection<Appointment>? Appointments { get; set; }
+
+        // Constructor
+        public Doctor(int userId, List<Appointment>? appointments)
         {
-            Name = name;
+            UserId = userId;
             Appointments = appointments;
         }
 
-        public Doctor()
-        {
-            
-        }
+        public Doctor() { }
     }
+
 }
